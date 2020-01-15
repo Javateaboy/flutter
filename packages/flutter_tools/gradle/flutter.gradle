@@ -358,8 +358,12 @@ class FlutterPlugin implements Plugin<Project> {
                 return
             }
             Project dependencyProject = project.rootProject.findProject(":$pluginDependencyName")
+<<<<<<< HEAD
             if (dependencyProject == null ||
                 !doesSupportAndroidPlatform(dependencyProject.projectDir.parentFile.path)) {
+=======
+            if (!dependencyProject.projectDir.exists() || dependencyProject == null) {
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
                 return
             }
             // Wait for the Android plugin to load and add the dependency to the plugin project.

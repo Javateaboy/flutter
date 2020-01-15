@@ -312,12 +312,18 @@ end
     destinationAppFrameworkDirectory.createSync(recursive: true);
 
     if (mode == BuildMode.debug) {
+<<<<<<< HEAD
       final Status status = globals.logger.startProgress(' ├─Adding placeholder App.framework for debug...', timeout: timeoutConfiguration.fastOperation);
       try {
         await _produceStubAppFrameworkIfNeeded(mode, iPhoneBuildOutput, simulatorBuildOutput, destinationAppFrameworkDirectory);
       } finally {
         status.stop();
       }
+=======
+      final Status status = logger.startProgress(' ├─Add placeholder App.framework for debug...', timeout: timeoutConfiguration.fastOperation);
+      await _produceStubAppFrameworkIfNeeded(mode, iPhoneBuildOutput, simulatorBuildOutput, destinationAppFrameworkDirectory);
+      status.stop();
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
     } else {
       await _produceAotAppFrameworkIfNeeded(mode, iPhoneBuildOutput, destinationAppFrameworkDirectory);
     }
@@ -379,10 +385,42 @@ end
     }
   }
 
+  Future<void> _produceStubAppFrameworkIfNeeded(BuildMode mode, Directory iPhoneBuildOutput, Directory simulatorBuildOutput, Directory destinationAppFrameworkDirectory) async {
+    if (mode != BuildMode.debug) {
+      return;
+    }
+    const String appFrameworkName = 'App.framework';
+    const String binaryName = 'App';
+
+    final Directory iPhoneAppFrameworkDirectory = iPhoneBuildOutput.childDirectory(appFrameworkName);
+    final File iPhoneAppFrameworkFile = iPhoneAppFrameworkDirectory.childFile(binaryName);
+    await createStubAppFramework(iPhoneAppFrameworkFile, SdkType.iPhone);
+
+    final Directory simulatorAppFrameworkDirectory = simulatorBuildOutput.childDirectory(appFrameworkName);
+    final File simulatorAppFrameworkFile = simulatorAppFrameworkDirectory.childFile(binaryName);
+    await createStubAppFramework(simulatorAppFrameworkFile, SdkType.iPhoneSimulator);
+
+    final List<String> lipoCommand = <String>[
+      'xcrun',
+      'lipo',
+      '-create',
+      iPhoneAppFrameworkFile.path,
+      simulatorAppFrameworkFile.path,
+      '-output',
+      destinationAppFrameworkDirectory.childFile(binaryName).path
+    ];
+
+    await processUtils.run(
+      lipoCommand,
+      allowReentrantFlutter: false,
+    );
+  }
+
   Future<void> _produceAotAppFrameworkIfNeeded(BuildMode mode, Directory iPhoneBuildOutput, Directory destinationAppFrameworkDirectory) async {
     if (mode == BuildMode.debug) {
       return;
     }
+<<<<<<< HEAD
     final Status status = globals.logger.startProgress(
       ' ├─Building Dart AOT for App.framework...', timeout: timeoutConfiguration.slowOperation);
     try {
@@ -398,6 +436,21 @@ end
         iosBuildArchs: <DarwinArch>[DarwinArch.armv7, DarwinArch.arm64],
         dartDefines: dartDefines,
       );
+=======
+    final Status status = logger.startProgress(' ├─Building Dart AOT for App.framework...', timeout: timeoutConfiguration.slowOperation);
+    await aotBuilder.build(
+      platform: TargetPlatform.ios,
+      outputPath: iPhoneBuildOutput.path,
+      buildMode: mode,
+      // Relative paths show noise in the compiler https://github.com/dart-lang/sdk/issues/37978.
+      mainDartFile: fs.path.absolute(targetFile),
+      quiet: true,
+      bitcode: true,
+      reportTimings: false,
+      iosBuildArchs: <DarwinArch>[DarwinArch.armv7, DarwinArch.arm64],
+      dartDefines: dartDefines,
+    );
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
 
       const String appFrameworkName = 'App.framework';
       copyDirectorySync(iPhoneBuildOutput.childDirectory(appFrameworkName), destinationAppFrameworkDirectory);

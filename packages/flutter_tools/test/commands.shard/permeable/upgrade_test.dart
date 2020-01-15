@@ -131,9 +131,15 @@ void main() {
         flutterVersion,
       );
       expect(await result, null);
+<<<<<<< HEAD
       verifyNever(globals.processManager.start(
         <String>[
           globals.fs.path.join('bin', 'flutter'),
+=======
+      verifyNever(processManager.start(
+        <String>[
+          fs.path.join('bin', 'flutter'),
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
           'upgrade',
           '--continue',
           '--no-version-check',

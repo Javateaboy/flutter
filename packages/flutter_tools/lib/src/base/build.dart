@@ -241,7 +241,11 @@ class AOTSnapshotter {
     ];
 
     const String embedBitcodeArg = '-fembed-bitcode';
+<<<<<<< HEAD
     final String assemblyO = globals.fs.path.join(outputPath, 'snapshot_assembly.o');
+=======
+    final String assemblyO = fs.path.join(outputPath, 'snapshot_assembly.o');
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
     List<String> isysrootArgs;
     if (isIOS) {
       final String iPhoneSDKLocation = await xcode.sdkLocation(SdkType.iPhone);

@@ -117,8 +117,13 @@ class UpgradeCommandRunner {
     final bool alreadyUpToDate = await attemptFastForward(flutterVersion);
     if (alreadyUpToDate) {
       // If the upgrade was a no op, then do not continue with the second half.
+<<<<<<< HEAD
       globals.printStatus('Flutter is already up to date on channel ${flutterVersion.channel}');
       globals.printStatus('$flutterVersion');
+=======
+      printStatus('Flutter is already up to date on channel ${flutterVersion.channel}');
+      printStatus('$flutterVersion');
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
     } else {
       await flutterUpgradeContinue();
     }
@@ -253,7 +258,11 @@ class UpgradeCommandRunner {
       alreadyUpToDate = newFlutterVersion.channel == oldFlutterVersion.channel &&
         newFlutterVersion.frameworkRevision == oldFlutterVersion.frameworkRevision;
     } catch (e) {
+<<<<<<< HEAD
       globals.printTrace('Failed to determine FlutterVersion after upgrade fast-forward: $e');
+=======
+      printTrace('Failed to determine FlutterVersion after upgrade fast-forward: $e');
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
     }
     return alreadyUpToDate;
   }

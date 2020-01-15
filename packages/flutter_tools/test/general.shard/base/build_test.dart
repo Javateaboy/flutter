@@ -245,7 +245,12 @@ void main() {
       mockXcode = MockXcode();
       when(mockXcode.sdkLocation(any)).thenAnswer((_) => Future<String>.value(kSDKPath));
 
+<<<<<<< HEAD
       for (final BuildMode mode in BuildMode.values) {
+=======
+      bufferLogger = BufferLogger();
+      for (BuildMode mode in BuildMode.values) {
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
         when(mockArtifacts.getArtifactPath(Artifact.snapshotDart,
             platform: anyNamed('platform'), mode: mode)).thenReturn(kSnapshotDart);
       }
@@ -348,7 +353,11 @@ void main() {
       expect(clangArgs, contains('-isysroot'));
       expect(clangArgs, contains(kSDKPath));
 
+<<<<<<< HEAD
       final File assemblyFile = globals.fs.file(assembly);
+=======
+      final File assemblyFile = fs.file(assembly);
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
       expect(assemblyFile.existsSync(), true);
       expect(assemblyFile.readAsStringSync().contains('.section __DWARF'), true);
     }, overrides: contextOverrides);
@@ -405,8 +414,13 @@ void main() {
       expect(clangArgs, contains('-isysroot'));
       expect(clangArgs, contains(kSDKPath));
 
+<<<<<<< HEAD
       final File assemblyFile = globals.fs.file(assembly);
       final File assemblyBitcodeFile = globals.fs.file('$assembly.stripped.S');
+=======
+      final File assemblyFile = fs.file(assembly);
+      final File assemblyBitcodeFile = fs.file('$assembly.stripped.S');
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
       expect(assemblyFile.existsSync(), true);
       expect(assemblyBitcodeFile.existsSync(), true);
       expect(assemblyFile.readAsStringSync().contains('.section __DWARF'), true);
@@ -456,7 +470,11 @@ void main() {
       verify(xcode.cc(argThat(contains('-isysroot')))).called(1);
       verify(xcode.clang(argThat(contains('-isysroot')))).called(1);
 
+<<<<<<< HEAD
       final File assemblyFile = globals.fs.file(assembly);
+=======
+      final File assemblyFile = fs.file(assembly);
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
       expect(assemblyFile.existsSync(), true);
       expect(assemblyFile.readAsStringSync().contains('.section __DWARF'), true);
     }, overrides: contextOverrides);

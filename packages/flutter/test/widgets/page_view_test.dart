@@ -663,7 +663,11 @@ void main() {
       await tester.pumpWidget(build());
 
       // The first 3 items should be visible and tappable.
+<<<<<<< HEAD
       for (final int index in visiblePages) {
+=======
+      for (int index in visiblePages) {
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
         expect(find.text(index.toString()), findsOneWidget);
         // The center of page 2's x-coordinate is 800, so we have to manually
         // offset it a bit to make sure the tap lands within the screen.
@@ -676,7 +680,11 @@ void main() {
       await tester.pump();
       // The last 3 items should be visible and tappable.
       visiblePages = const <int> [17, 18, 19];
+<<<<<<< HEAD
       for (final int index in visiblePages) {
+=======
+      for (int index in visiblePages) {
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
         expect(find.text('$index'), findsOneWidget);
         await tester.tap(find.text('$index'));
         expect(tappedIndex, index);

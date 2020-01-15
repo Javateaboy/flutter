@@ -78,9 +78,13 @@ void main() {
     }));
 
     test('flutter web help string', () {
+<<<<<<< HEAD
       expect(flutterWebFeature.generateHelpMessage(),
       'Enable or disable Flutter for web. '
       'This setting will take effect on the master, dev, and beta channels.');
+=======
+      expect(flutterWebFeature.generateHelpMessage(), 'Enable or disable Flutter for web. This setting will take effect on the master, dev, and beta channels.');
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
     });
 
     test('flutter macOS desktop help string', () {

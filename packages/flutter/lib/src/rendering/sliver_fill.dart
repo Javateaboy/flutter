@@ -57,6 +57,7 @@ class RenderSliverFillViewport extends RenderSliverFixedExtentBoxAdaptor {
     _viewportFraction = value;
     markNeedsLayout();
   }
+<<<<<<< HEAD
 }
 
 /// A sliver that contains a single box child that contains a scrollable and
@@ -180,6 +181,8 @@ class RenderSliverFillRemaining extends RenderSliverSingleBoxAdapter {
     if (child != null)
       setChildParentData(child, constraints, geometry);
   }
+=======
+>>>>>>> 18cd7a3601bcffb36fdf2f679f763b5e827c2e8e
 }
 
 /// A sliver that contains a single box child that is non-scrollable and fills
